@@ -13,7 +13,10 @@ $task2Duration = readline("Сколько примерно времени эта
 $task3 = readline("Какая еще задача стоит перед вами сегодня?\n");
 $task3Duration = readline("Сколько примерно времени эта задача займет?\n");
 
+$totalDuration = $task1Duration + $task2Duration + $task3Duration;
+
 print("$userName сегодня у вас запланировано 3 приоритетных задачи на день:
 - $task1(${task1Duration}ч)
 - $task2(${task2Duration}ч)
-- $task3(${task3Duration}ч)");
+- $task3(${task3Duration}ч)
+Примерное время выполнения плана = {$totalDuration}ч.");
