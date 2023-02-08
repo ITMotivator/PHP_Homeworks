@@ -68,6 +68,7 @@ class Task
             $statusArr['completionDate'] = $this->dateDone->format('d.m.Y H:i:s');
         }
         print_r($statusArr);
+
     }
 }
 
@@ -100,7 +101,7 @@ class User
     }
 }
 
-$user1 = new User('Ivan');
+$user1 = new User('John');
 $task1 = new Task($user1, 'Make PHP homework', 5);
 $task1->checkTaskStatus();
 $task1->changePriority(10);
