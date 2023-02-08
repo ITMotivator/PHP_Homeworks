@@ -9,12 +9,13 @@ class Task
     private int $priority;
     private bool $isDone = false;
     private User $user;
-    function __construct(User $user, int $priority)
+    function __construct(User $user, string $description, int $priority)
     {
         $this->user = $user;
         $this->priority = $priority;
         $this->dateCreated = new DateTime();
         $this->dateUpdated = $this->dateCreated;
+        $this->description = $description;
     }
     function setDescription(string $description): void
     {
@@ -57,6 +58,7 @@ class Task
             $status = 'active';
         }
         $statusArr = [
+            'description' => $this->description,
             'dateCreated' => $this->getCreationDate(),
             'lastUpdate' => $this->getLastUpdateDate(),
             'priority' => $this->priority,
@@ -99,7 +101,7 @@ class User
 }
 
 $user1 = new User('Ivan');
-$task1 = new Task($user1, 5);
+$task1 = new Task($user1, 'Make PHP homework', 5);
 $task1->checkTaskStatus();
 $task1->changePriority(10);
 echo $task1->getCreationDate();
