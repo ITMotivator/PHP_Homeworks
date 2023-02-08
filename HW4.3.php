@@ -39,25 +39,23 @@ $box = [
     ]
 ];
 
-$res = false;
 function checkIfIn(string $item, $arr): bool
 {
-    global $res;
-    if (!is_array($arr)) {
-        if ($arr === $item) {
-            $res = true;
-            return $res;
+    foreach ($arr as $internalArr)
+        if (is_array($internalArr)) {
+            if (checkIfIn($item, $internalArr) === true) {
+                return true;
+            }
+        } else {
+            if ($internalArr === $item) {
+                return true;
+            }
         }
-    } else {
-        foreach ($arr as $nextArr) {
-            checkIfIn($item, $nextArr);
-        }
-    }
-    return $res;
+    return false;
 }
 
 
-$result = checkIfIn("Ноутбук", $box);
+$result = checkIfIn('Книга', $box);
 var_dump($result);
 
 ?>
