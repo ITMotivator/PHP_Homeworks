@@ -4,17 +4,18 @@ require_once 'User.php';
 
 class UserProvider
 {
-    private static array $accounts = [
+    private array $accounts = [
         'geekbrains' => '123123',
-        'root' => '321',
+        'root' => '123',
     ];
 
-    public static function getByUsernameAndPassword(string $username, string $password): ?User
+    public function getByUsernameAndPassword(string $username, string $password): ?User
     {
-        $expectedPassword = self::$accounts[$username] ?? null;
+        $expectedPassword = $this->accounts[$username] ?? null;
         if ($expectedPassword === $password) {
             return new User($username);
         }
+
         return null;
     }
 }
