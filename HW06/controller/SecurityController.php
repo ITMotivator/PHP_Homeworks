@@ -1,20 +1,29 @@
 <?php
-require_once 'model/UserProvider.php';
-
-if (isset($_SESSION['user'])){
-    header('Location: /');
-}
 
 $error = null;
-if (isset($_POST['username'], $_POST['password'])) {
-    ['username' => $username, 'password' => $password] = $_POST;
+if (isset($_GET['action'])) {
 
-    $user = UserProvider::getByUsernameAndPassword($username, $password);
+    if ($_GET['action'] === 'logout') {
+        unset($_SESSION['user']);
+        header('Location: /');
+    } elseif ($_GET['action'] === 'signin') {
+        if (isset($_SESSION['user'])) {
+            header('Location: /');
+        } elseif (isset($_POST['username'], $_POST['password'])) {
 
-    if (is_null($user)) {
-        $error = 'Пользователь с указанными учетными данными не найден';
-    }else{
-        $_SESSION['user'] = $user;
+            ['username' => $username, 'password' => $password] = $_POST;
+
+            $userProvider = new UserProvider();
+            $user = $userProvider->getByUsernameAndPassword($username, $password);
+
+            if (is_null($user)) {
+                $error = 'Пользователь с указанными учетными данными не найден';
+            } else {
+                $_SESSION['user'] = $user;
+                header('Location: /');
+            }
+
+        }
     }
 }
 
