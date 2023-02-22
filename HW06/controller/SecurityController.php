@@ -22,7 +22,6 @@ if (isset($_GET['action'])) {
                 $_SESSION['user'] = $user;
                 header('Location: /');
             }
-
         }
     }
 }
